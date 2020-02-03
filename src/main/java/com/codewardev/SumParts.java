@@ -1,17 +1,18 @@
 package com.codewardev;
 
+// https://www.codewars.com/kata/5ce399e0047a45001c853c2b/train/java
+
 import java.util.Arrays;
 
 public class SumParts {
 
 	public static int[] sumParts(int[] ls) {
-		if(ls.length == 0) {
-			return new int[] {0};
-		}
 		int[] result = new int[ls.length+1];
 		result[0] = Arrays.stream(ls).sum();
-		System.arraycopy(sumParts(Arrays.stream(ls).skip(1).toArray()), 0, result, 1, ls.length);
-		
+		for(int i=1; i<ls.length+1; i++) {
+			result[i] = result[i-1] - ls[i-1];
+		}
+
 		return result;
 	}
 
